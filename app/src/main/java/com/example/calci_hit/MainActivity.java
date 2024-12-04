@@ -62,287 +62,47 @@ public class MainActivity extends AppCompatActivity {
         Button del = findViewById(R.id.BULL);
 
 
-        num0.setOnTouchListener((v, event) -> {
+        configureButton(num0, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(0));
+        configureButton(num1, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(1));
+        configureButton(num2, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(2));
+        configureButton(num3, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(3));
+        configureButton(num4, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(4));
+        configureButton(num5, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(5));
+        configureButton(num6, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(6));
+        configureButton(num7, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(7));
+        configureButton(num8, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(8));
+        configureButton(num9, R.drawable.buttongrey, R.drawable.buttonblack, () -> handleNumberClick(9));
+        configureButton(plus, R.drawable.btnlightorg, R.drawable.designbutton, () -> handleOperatorClick("+"));
+        configureButton(minus, R.drawable.btnlightorg, R.drawable.designbutton, () -> handleOperatorClick("-"));
+        configureButton(div, R.drawable.btnlightorg, R.drawable.designbutton, () -> handleOperatorClick("/"));
+        configureButton(dup, R.drawable.btnlightorg, R.drawable.designbutton, () -> handleOperatorClick("x"));
+        configureButton(eq, R.drawable.btnlightorg, R.drawable.designbutton, this::handleEqualClick);
+        configureButton(modulu, R.drawable.btnlightlightgrey, R.drawable.buttongrey, () -> handleOperatorClick("%"));
+        configureButton(abs, R.drawable.btnlightlightgrey, R.drawable.buttongrey, () -> handleOperatorClick("$"));
+        configureButton(ac, R.drawable.btnlightlightgrey, R.drawable.buttongrey, this::resetAC);
+        configureButton(del, R.drawable.buttongrey, R.drawable.buttonblack, this::deleteNumberClick);
+        configureButton(ans, R.drawable.buttongrey, R.drawable.buttonblack, () -> prevAns(finalANS));
+
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void configureButton(View button, int pressedDrawable, int defaultDrawable, Runnable onPressAction) {
+        button.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(0);
+                    v.setBackgroundResource(pressedDrawable);
+                    onPressAction.run(); // Execute the provided action
                     break;
                 case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
                 case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num1.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(1);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num2.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(2);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num3.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(3);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num4.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(4);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num5.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(5);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num6.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(6);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num7.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(7);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num8.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(8);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        num9.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    handleNumberClick(9);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        plus.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.btnlightorg); // Replace with your drawable for clicked state
-                    handleOperatorClick("+");
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        minus.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.btnlightorg); // Replace with your drawable for clicked state
-                    handleOperatorClick("-");
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        div.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.btnlightorg); // Replace with your drawable for clicked state
-                    handleOperatorClick("/");
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        dup.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.btnlightorg); // Replace with your drawable for clicked state
-                    handleOperatorClick("x");
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        eq.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.btnlightorg); // Replace with your drawable for clicked state
-                    handleEqualClick();
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.designbutton); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        modulu.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.btnlightlightgrey); // Replace with your drawable for clicked state
-                    handleOperatorClick("%");
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        abs.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.btnlightlightgrey); // Replace with your drawable for clicked state
-                    handleOperatorClick("$");
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        ac.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.btnlightlightgrey); // Replace with your drawable for clicked state
-                    resetAC();
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        del.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    deleteNumberClick();
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                    break;
-            }
-            return true;
-        });
-        ans.setOnTouchListener((v, event) -> {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    v.setBackgroundResource(R.drawable.buttongrey); // Replace with your drawable for clicked state
-                    prevAns(finalANS);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
-                case MotionEvent.ACTION_CANCEL:
-                    v.setBackgroundResource(R.drawable.buttonblack); // Replace with your drawable for default state
+                    v.setBackgroundResource(defaultDrawable);
                     break;
             }
             return true;
         });
     }
+
 
     private void prevAns(int finalANS){
 
